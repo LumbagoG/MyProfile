@@ -1,0 +1,30 @@
+.theme-switcher {
+  width: 50px;
+  height: 24px;
+  border-radius: 15px;
+  margin-left: auto !important;
+  background: white;
+}
+.theme-switcher-checkbox {
+  position: relative;
+  display: none;
+}
+.theme-switcher-checkbox + .theme-switcher-label::before, .theme-switcher-checkbox:checked + .theme-switcher-label::before {
+  display: flex;
+  align-items: flex-start;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 50%;
+}
+.theme-switcher-checkbox + .theme-switcher-label::before {
+  content: " ";
+  transform: translateX(-13px);
+}
+.theme-switcher-checkbox:checked + .theme-switcher-label::before {
+  fill: #fff300;
+  transform: translateX(13px);
+}
+
+/*# sourceMappingURL=ThemeSwitcherBtn.css.map */

@@ -1,0 +1,18 @@
+.notification {
+  margin: 0 auto;
+  animation: notification 5s cubic-bezier(0.03, 1.21, 0.03, 1.22);
+  transform: translateY(-15vh);
+}
+@keyframes notification {
+  0% {
+    transform: translateY(-15vh);
+  }
+  50% {
+    transform: translateY(0vh);
+  }
+  100% {
+    transform: translateY(-15vh);
+  }
+}
+
+/*# sourceMappingURL=notification.css.map */

@@ -1,0 +1,40 @@
+// Custom checkbox switcher
+
+// Checkbox wrapper
+.theme-switcher {
+  width: 50px;
+  height: 24px;
+  border-radius: 15px;
+  margin-left: auto !important;
+  background: white;
+
+  // Input
+  &-checkbox {
+    position: relative;
+    display: none;
+  }
+
+  // General label before
+  &-checkbox + &-label::before,
+  &-checkbox:checked + &-label::before {
+    display: flex;
+    align-items: flex-start;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  // Checkbox label before
+  &-checkbox + &-label::before {
+    content: " ";
+    transform: translateX(-13px);
+  }
+
+  // Checkbox checked before
+  &-checkbox:checked + &-label::before {
+    fill: #fff300;
+    transform: translateX(13px);
+  }
+}
