@@ -17,7 +17,6 @@ import LightThemeImg from "../../../images/theme/light_mode_black_24dp.svg";
 const ThemeSwitcherBtn = (): JSX.Element => {
   const [stateTheme, setStateTheme] = useState(localStorage.theme);
   const [stateNotification, setStateNotification] = useState("none");
-  const buttonTheme = useRef(stateTheme);
 
   /**
    * Работа с localstorage для переключения темы
@@ -34,6 +33,10 @@ const ThemeSwitcherBtn = (): JSX.Element => {
     }
   });
 
+  /**
+   * Исправление бага при обновлении страницы с включенной темой
+   * (чтобы тема из LS не совпадала с состоянием темы)
+   */
   useEffect(() => {
     if (stateTheme === "dark" && localStorage.theme === "dark") {
       setStateTheme("light");
@@ -42,7 +45,10 @@ const ThemeSwitcherBtn = (): JSX.Element => {
     }
   }, [stateTheme]);
 
-  const switchThemeBtn = () => {
+  /**
+   * Слушатель кнопки переключения темы
+   */
+  const switchThemeBtnHandler = () => {
     if (stateTheme === "dark") {
       setStateNotification("fixed");
       setStateTheme("light");
@@ -65,11 +71,15 @@ const ThemeSwitcherBtn = (): JSX.Element => {
     return <Notification isOpen={props.display} />;
   };
 
+  /**
+   * Рендер иконки темы
+   * @constructor
+   */
   const RenderImageTheme = () => {
     if (stateTheme === "dark") {
-      return <img src={LightThemeImg} alt="" ref={buttonTheme} />;
+      return <img src={LightThemeImg} alt="" />;
     } else {
-      return <img src={DarkThemeImg} alt="" ref={buttonTheme} />;
+      return <img src={DarkThemeImg} alt="" />;
     }
   };
 
@@ -78,7 +88,7 @@ const ThemeSwitcherBtn = (): JSX.Element => {
       {/*Кнопка именении темы*/}
       <div className="theme-switcher flex justify-center sm:justify-end sm:mr-1">
         <button
-          onClick={switchThemeBtn}
+          onClick={switchThemeBtnHandler}
           className={`theme-switcher-button rounded-md theme-switcher-${stateTheme}`}
         >
           <RenderImageTheme />
