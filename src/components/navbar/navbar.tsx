@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Styles
 import "./navbar.css";
@@ -12,7 +12,7 @@ import ThemeSwitcherBtn from "../buttons/themeSwitcherBtn/themeSwitcherBtn";
  * @constructor
  */
 const Navbar = (): JSX.Element => {
-  const [openBurgerMenu, setOpenBurgerMenu] = React.useState("none");
+  const [openBurgerMenu, setOpenBurgerMenu] = useState("none");
 
   return (
     <>
@@ -44,12 +44,12 @@ const Navbar = (): JSX.Element => {
                       children="Contact me"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     />
-
-                    <ThemeSwitcherBtn />
                   </div>
                 </div>
               </div>
             </div>
+
+            <ThemeSwitcherBtn />
 
             {/* Burger menu */}
             <div className="-mr-2 flex md:hidden">
@@ -109,10 +109,10 @@ const Navbar = (): JSX.Element => {
           id="mobile-menu"
         >
           {/* Anchors burger menu */}
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 sm:w-full">
             <Anchor
               children="About me"
-              className="bg-gray-800 text-white block px-3 py-2 rounded-md text-base font-medium"
+              className="sm:max-w-full bg-gray-800 text-white block px-3 py-2 rounded-md text-base font-medium"
             />
 
             <Anchor

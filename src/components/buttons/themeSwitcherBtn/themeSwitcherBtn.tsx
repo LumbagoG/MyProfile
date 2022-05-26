@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // Styles
 import "./ThemeSwitcherBtn.css";
 
 // Components
 import Notification from "../../notification/notification";
+
+// Images
+import DarkThemeImg from "../../../images/theme/dark_mode_black_24dp.svg";
+import LightThemeImg from "../../../images/theme/light_mode_black_24dp.svg";
 
 /**
  * Button switcher color theme
@@ -13,34 +17,42 @@ import Notification from "../../notification/notification";
 const ThemeSwitcherBtn = (): JSX.Element => {
   const [stateTheme, setStateTheme] = useState(localStorage.theme);
   const [stateNotification, setStateNotification] = useState("none");
+  const buttonTheme = useRef(stateTheme);
 
   /**
    * Работа с localstorage для переключения темы
    */
   useEffect(() => {
-    return () => {
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        localStorage.theme = stateTheme;
-        document.documentElement.classList.add("dark");
-      } else {
-        localStorage.theme = stateTheme;
-        document.documentElement.classList.remove("dark");
-      }
-    };
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  });
+
+  useEffect(() => {
+    if (stateTheme === "dark" && localStorage.theme === "dark") {
+      setStateTheme("light");
+    } else if (stateTheme === "light" && localStorage.theme === "light") {
+      setStateTheme("dark");
+    }
   }, [stateTheme]);
 
-  /**
-   * Рендер уведомления при изменении темы
-   */
-  useEffect(() => {
-    return () => {
+  const switchThemeBtn = () => {
+    if (stateTheme === "dark") {
       setStateNotification("fixed");
-    };
-  }, [stateTheme]);
+      setStateTheme("light");
+      localStorage.theme = "dark";
+    } else if (stateTheme === "light") {
+      setStateNotification("fixed");
+      setStateTheme("dark");
+      localStorage.theme = "light";
+    }
+  };
 
   /**
    * Компонент уведомления
@@ -53,37 +65,28 @@ const ThemeSwitcherBtn = (): JSX.Element => {
     return <Notification isOpen={props.display} />;
   };
 
-  /**
-   * Слушатель события для переключения темы
-   */
-  const changeColorThemeHandler = () => {
+  const RenderImageTheme = () => {
     if (stateTheme === "dark") {
-      setStateTheme("light");
+      return <img src={LightThemeImg} alt="" ref={buttonTheme} />;
     } else {
-      setStateTheme("dark");
+      return <img src={DarkThemeImg} alt="" ref={buttonTheme} />;
     }
   };
 
   return (
     <>
+      {/*Кнопка именении темы*/}
+      <div className="theme-switcher flex justify-center sm:justify-end sm:mr-1">
+        <button
+          onClick={switchThemeBtn}
+          className={`theme-switcher-button rounded-md theme-switcher-${stateTheme}`}
+        >
+          <RenderImageTheme />
+        </button>
+      </div>
+
       {/*Уведомление об изменении темы*/}
       <RenderNotification display={stateNotification} />
-
-      {/*Чек-бокс*/}
-      <div className="theme-switcher flex justify-center">
-        <input
-          className="theme-switcher-checkbox"
-          id="themeSwitcherCheckbox"
-          name="themeSwitcherCheckbox"
-          type="checkbox"
-          onChange={changeColorThemeHandler}
-        />
-
-        <label
-          className="theme-switcher-label"
-          htmlFor="themeSwitcherCheckbox"
-        ></label>
-      </div>
     </>
   );
 };

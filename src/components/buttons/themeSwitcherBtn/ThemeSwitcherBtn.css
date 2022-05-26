@@ -1,30 +1,30 @@
 .theme-switcher {
-  width: 50px;
-  height: 24px;
   border-radius: 15px;
   margin-left: auto !important;
-  background: white;
 }
-.theme-switcher-checkbox {
-  position: relative;
-  display: none;
-}
-.theme-switcher-checkbox + .theme-switcher-label::before, .theme-switcher-checkbox:checked + .theme-switcher-label::before {
+.theme-switcher-button {
   display: flex;
-  align-items: flex-start;
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  text-align: center;
-  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
-.theme-switcher-checkbox + .theme-switcher-label::before {
-  content: " ";
-  transform: translateX(-13px);
+.theme-switcher-button:focus {
+  border: none;
+  outline: none;
 }
-.theme-switcher-checkbox:checked + .theme-switcher-label::before {
-  fill: #fff300;
-  transform: translateX(13px);
+.theme-switcher-dark, .theme-switcher-light {
+  width: 40px;
+  height: 40px;
+}
+@media (max-width: 767px) {
+  .theme-switcher-dark, .theme-switcher-light {
+    margin-right: 0.5em;
+  }
+}
+.theme-switcher-light {
+  background: #fff;
+}
+.theme-switcher-dark {
+  background: #1f2937;
 }
 
 /*# sourceMappingURL=ThemeSwitcherBtn.css.map */
