@@ -38,6 +38,7 @@ const ThemeSwitcherBtn = (): JSX.Element => {
    * (чтобы тема из LS не совпадала с состоянием темы)
    */
   useEffect(() => {
+    console.log("theme");
     if (stateTheme === "dark" && localStorage.theme === "dark") {
       setStateTheme("light");
     } else if (stateTheme === "light" && localStorage.theme === "light") {
@@ -49,12 +50,12 @@ const ThemeSwitcherBtn = (): JSX.Element => {
    * Слушатель кнопки переключения темы
    */
   const switchThemeBtnHandler = () => {
+    setStateNotification("fixed");
+
     if (stateTheme === "dark") {
-      setStateNotification("fixed");
       setStateTheme("light");
       localStorage.theme = "dark";
     } else if (stateTheme === "light") {
-      setStateNotification("fixed");
       setStateTheme("dark");
       localStorage.theme = "light";
     }

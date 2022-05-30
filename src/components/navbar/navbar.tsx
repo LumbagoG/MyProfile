@@ -17,9 +17,9 @@ const Navbar = (): JSX.Element => {
   return (
     <>
       {/* Navbar */}
-      <nav className="dark:bg-gray-800 dark:text-white bg-blue-50 text-gray-800">
+      <nav className="dark:bg-gray-800 dark:text-white bg-blue-50 text-gray-800 sticky top-0 backdrop-blur-lg drop-shadow">
         {/* Header desktop */}
-        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 shadow">
           <div className="flex items-center justify-between h-16">
             {/* Anchors navbar */}
             <div className="flex items-center w-full">
